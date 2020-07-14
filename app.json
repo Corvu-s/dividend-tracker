@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app-testing",
-    "slug": "app-testing",
+    "name": "cool-thing",
+    "slug": "cool-thing",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }
