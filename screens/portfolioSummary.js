@@ -19,10 +19,12 @@ function portfolioSummary({ navigation }) {
   }
 
   useEffect(() => {
-    console.log(state.portfolios[data - 1]);
-    state.portfolios[data - 1].stocks.map((item) => {
-      setPie1([...pie1, { x: item.ticker, y: item.cost }]);
+    console.log("STRA");
+
+    state.portfolios[data - 1].stocks.map((item, index) => {
+      setPie1((prevState) => [...prevState, { x: item.ticker, y: item.cost }]); //useful bc it updates itself by adding the prev state along with a new element
     });
+    console.log("RES");
     console.log(pie1);
   });
   //plan for this screen
@@ -37,21 +39,17 @@ function portfolioSummary({ navigation }) {
         titleText={"Summary of " + state.portfolios[data - 1].portfolioName}
       />
       <VictoryPie
-        data={[
-          { x: "Cats", y: 35 },
-          { x: "Dogs", y: 40 },
-          { x: "Birds", y: 55 },
-        ]}
+        data={pie1}
+        labels={({ datum }) => `${datum.x}: ${datum.y}`}
+        width={300}
       />
 
       <View style={styles.container}>
-        <DivCalendar />
-
         <FAB
           style={styles.fab}
           large
           icon="refresh"
-          onPress={() => handleCall()}
+          onPress={() => setReload(!reload)}
         ></FAB>
       </View>
       <NavBar nav={navigation} />
