@@ -1,4 +1,3 @@
-import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import ViewNotes from "../screens/ViewNotes";
 import AddNotes from "../screens/AddNotes";
@@ -9,40 +8,22 @@ import AddPortfolio from "../screens/AddPortfolio";
 import Summary from "../screens/Summary";
 import portfolioSummary from "../screens/portfolioSummary";
 import DivCalendar from "../components/DivCalendar";
-const StackNavigator = createStackNavigator(
-  {
-    ViewNotes: {
-      screen: ViewNotes,
-    },
-    AddNotes: {
-      screen: AddNotes,
-    },
-    EditNotes: {
-      screen: EditNotes,
-    },
-    TestAPI: {
-      screen: TestAPI,
-    },
-    ViewPortfolio: {
-      screen: ViewPortfolio,
-    },
-    AddPortfolio: {
-      screen: AddPortfolio,
-    },
-    Summary: {
-      screen: Summary,
-    },
-    portfolioSummary: {
-      screen: portfolioSummary,
-    },
-    DivCalendar: {
-      screen: DivCalendar,
-    },
-  },
-  {
-    initialRouteName: "ViewPortfolio",
-    headerMode: "none",
-    mode: "modal",
-  }
-);
-export default createAppContainer(StackNavigator);
+
+const Stack = createStackNavigator();
+
+function StackNav() {
+  <Stack.Navigator initialRouteName="ViewNotes">
+    <Stack.Screen name="ViewNotes" component={ViewNotes} />
+    <Stack.Screen name="AddNotes" component={AddNotes} />
+    <Stack.Screen name="EditNotes" component={EditNotes} />
+    <Stack.Screen name="TestAPI" component={TestAPI} />
+    <Stack.Screen name="ViewPortfolio" component={ViewPortfolio} />
+    <Stack.Screen name="AddPortfolio" component={AddPortfolio} />
+    <Stack.Screen name="Summary" component={Summary} />
+    <Stack.Screen name="AddPortfolio" component={AddPortfolio} />
+    <Stack.Screen name="portfolioSummary" component={portfolioSummary} />
+    <Stack.Screen name="DivCalendar" component={DivCalendar} />
+  </Stack.Navigator>;
+}
+
+export default StackNav;
