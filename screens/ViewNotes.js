@@ -45,7 +45,7 @@ function ViewNotes({ navigation }) {
             dispatch({
               type: "ADD_PRICE",
               i: index,
-              data: responseJson.quote.latestPrice,
+              data: responseJson.quote.iexRealtimePrice,
             });
             console.log(state);
           })
