@@ -12,6 +12,7 @@ import Head from "../components/Head";
 import { useState, useEffect, useContext } from "react";
 import NavBar from "../components/NavBar";
 import { Context } from "../navigation/Store";
+import styles from "../Styling/styles";
 //////////////////////////////////////////////////
 function ViewNotes({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
@@ -158,7 +159,7 @@ function ViewNotes({ navigation }) {
         onPress={() => {
           setEdit(!edit);
         }}
-        style={styles.iconButton}
+        style={styles.view_stock_edit}
       />
       <IconButton
         icon="check"
@@ -167,7 +168,7 @@ function ViewNotes({ navigation }) {
         onPress={() => {
           saveSet();
         }}
-        style={styles.saveButton}
+        style={styles.iconButton}
       />
       <View style={styles.container}>
         {state.portfolios[state.activePort - 1].stocks.length == 0 ? (
@@ -185,7 +186,7 @@ function ViewNotes({ navigation }) {
               extraData={reload}
               renderItem={({ item, index }) => (
                 <>
-                  <List.Section style={styles.listSize}>
+                  <List.Section style={styles.view_stocks_listSize}>
                     <List.Item
                       title={item.name}
                       description={
@@ -197,8 +198,8 @@ function ViewNotes({ navigation }) {
                       }
                       descriptionNumberOfLines={1}
                       titleNumberOfLines={1}
-                      titleStyle={styles.listTitle}
-                      descriptionStyle={styles.descriptionStyle}
+                      titleStyle={styles.view_stocks_listTitle}
+                      descriptionStyle={styles.view_stocks_descriptionStyle}
                       onPress={() =>
                         navigation.navigate("EditNotes", {
                           i: index, //index for the specific stock in the stack
@@ -207,7 +208,7 @@ function ViewNotes({ navigation }) {
                     />
                     {edit ? (
                       <>
-                        <Caption style={styles.editEnabled}>
+                        <Caption style={styles.view_stocks_editEnabled}>
                           Book:$
                           {
                             state.portfolios[state.activePort - 1].stocks[index]
@@ -239,14 +240,14 @@ function ViewNotes({ navigation }) {
                               .price
                           )
                         }
-                        style={styles.add}
+                        style={styles.view_stocks_add}
                       ></Button>
                       <Button
                         compact="true"
                         icon="minus"
                         mode="contained"
                         onPress={() => handleDecrease(index)}
-                        style={styles.sub}
+                        style={styles.view_stocks_sub}
                       ></Button>
                       <Button
                         compact="true"
@@ -300,89 +301,5 @@ function ViewNotes({ navigation }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-  },
-  fab: {
-    position: "absolute",
-    margin: 10,
-    right: 0,
-    bottom: 55,
-  },
-  fabStock: {
-    position: "absolute",
-    margin: 10,
-    right: 0,
-    bottom: 120,
-  },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 45,
-    top: 40,
-    margin: 10,
-  },
-  saveButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  listTitle: {
-    fontSize: 20,
-    left: 50,
-  },
-  descriptionStyle: {
-    left: 50,
-  },
-  delete: {
-    position: "absolute",
-    margin: 15,
-    right: 0,
-    bottom: 0,
-  },
-  add: {
-    position: "absolute",
-    margin: 15,
-    right: 45,
-    bottom: 0,
-  },
-  sub: {
-    position: "absolute",
-    margin: 15,
-    right: 90,
-    bottom: 0,
-  },
-  info: {
-    position: "absolute",
-    margin: 20,
-    right: -20,
-    top: 0,
-  },
-  editEnabled: {
-    position: "absolute",
-    margin: 16,
-    left: 50,
-    right: 0,
-    top: 55,
-  },
-  listSize: {
-    height: 90,
-  },
-});
 
 export default ViewNotes;

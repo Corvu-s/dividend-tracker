@@ -5,6 +5,7 @@ import { FAB, List, Button, IconButton, Surface } from "react-native-paper";
 import Head from "../components/Head";
 import NavBar from "../components/NavBar";
 import { Context } from "../navigation/Store";
+import styles from "../Styling/styles";
 //setup references for dependancy installation for npm and expo!! important for future projects
 //https://heartbeat.fritz.ai/getting-started-with-react-native-and-expo-using-hooks-in-2020-fb466c25b04c
 
@@ -113,91 +114,5 @@ function ViewPortfolio({ navigation }) {
     </>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-  },
-  fab: {
-    position: "absolute",
-    margin: 10,
-    right: 0,
-    bottom: 60,
-  },
-  fabStock: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 70,
-  },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  listTitle: {
-    fontSize: 20,
-  },
-  delete: {
-    position: "absolute",
-    margin: 15,
-    right: 0,
-    bottom: 0,
-  },
-  add: {
-    position: "absolute",
-    margin: 15,
-    right: 105,
-    bottom: 0,
-  },
-  sub: {
-    position: "absolute",
-    margin: 15,
-    right: 185,
-    bottom: 0,
-  },
-  editButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 5,
-    top: 40,
-    margin: 10,
-  },
-  info: {
-    position: "absolute",
-    margin: 20,
-    right: -20,
-    bottom: 0,
-  },
-  surface: {
-    margin: 3,
-    padding: 8,
-    height: 80,
-    width: 350,
 
-    elevation: 5,
-  },
-  editEnabled: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-  },
-  value: {
-    position: "absolute",
-    right: 50,
-    top: 30,
-  },
-});
 export default ViewPortfolio;

@@ -5,7 +5,7 @@ import Head from "../components/Head";
 import NavBar from "../components/NavBar";
 import { Context } from "../navigation/Store";
 import Picker from "../components/Picker";
-
+import styles from "../Styling/styles";
 function AddPortfolio({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
 
@@ -59,7 +59,7 @@ function AddPortfolio({ navigation }) {
           value={portfolioName}
           mode="outlined"
           onChangeText={setName}
-          style={styles.title}
+          style={styles.add_portfolio_title}
         />
 
         <TextInput
@@ -68,14 +68,14 @@ function AddPortfolio({ navigation }) {
           onChangeText={setDescription}
           mode="flat"
           multiline={true}
-          style={styles.text}
+          style={styles.add_portfolio_text}
           scrollEnabled={true}
           returnKeyType="done"
           blurOnSubmit={true}
         />
 
         <FAB
-          style={styles.fab}
+          style={styles.add_portfolio_save}
           small
           icon="check"
           disabled={portfolioName == "" ? true : false}
@@ -86,40 +86,5 @@ function AddPortfolio({ navigation }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  text: {
-    height: 100,
-    fontSize: 16,
-  },
-  fab: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 50,
-  },
-});
 
 export default AddPortfolio;
