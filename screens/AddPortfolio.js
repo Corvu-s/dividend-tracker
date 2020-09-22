@@ -83,7 +83,6 @@ function AddPortfolio({ navigation }) {
         />
         <Picker />
       </View>
-      <NavBar />
     </>
   );
 }

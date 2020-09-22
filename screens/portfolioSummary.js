@@ -11,8 +11,6 @@ function portfolioSummary({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const [pie1, setPie1] = useState([]);
 
-  const data = navigation.state.params.data; //id for the passed portfolio
-
   const [reload, setReload] = useState(false);
   function handleCall() {
     console.log("DO SOMETHING HERE");
@@ -21,7 +19,7 @@ function portfolioSummary({ navigation }) {
   useEffect(() => {
     console.log("STRA");
 
-    state.portfolios[data - 1].stocks.map((item, index) => {
+    state.portfolios[state.activeSummary].stocks.map((item, index) => {
       setPie1((prevState) => [...prevState, { x: item.ticker, y: item.cost }]); //useful bc it updates itself by adding the prev state along with a new element
     });
     console.log("RES");
@@ -36,7 +34,9 @@ function portfolioSummary({ navigation }) {
   return (
     <>
       <Head
-        titleText={"Summary of " + state.portfolios[data - 1].portfolioName}
+        titleText={
+          "Summary of " + state.portfolios[state.activeSummary].portfolioName
+        }
       />
       <VictoryPie
         data={pie1}
@@ -52,7 +52,6 @@ function portfolioSummary({ navigation }) {
           onPress={() => setReload(!reload)}
         ></FAB>
       </View>
-      <NavBar nav={navigation} />
     </>
   );
 }

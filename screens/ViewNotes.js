@@ -297,7 +297,6 @@ function ViewNotes({ navigation }) {
           onPress={() => navigation.navigate("TestAPI")}
         />
       </View>
-      <NavBar nav={navigation} data={"test"} />
     </>
   );
 }

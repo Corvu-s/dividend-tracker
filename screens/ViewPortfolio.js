@@ -110,7 +110,6 @@ function ViewPortfolio({ navigation }) {
           onPress={() => navigation.navigate("AddPortfolio")}
         ></FAB>
       </View>
-      <NavBar nav={navigation} />
     </>
   );
 }

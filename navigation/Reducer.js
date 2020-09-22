@@ -8,7 +8,7 @@ const Reducer = (state, action) => {
     case "SET_ACTIVE_SUMMARY":
       return {
         ...state,
-        activeSummary: action.index,
+        activeSummary: action.data,
       };
     case "ADD_PORT": //add an post to the main array
       return {

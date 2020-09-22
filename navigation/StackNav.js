@@ -9,22 +9,37 @@ import AddPortfolio from "../screens/AddPortfolio";
 import Summary from "../screens/Summary";
 import portfolioSummary from "../screens/portfolioSummary";
 import DivCalendar from "../components/DivCalendar";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
+//import DrawerControl from "../navigation/DrawerControl";
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawerControl() {
+  return (
+    <Drawer.Navigator initialRouteName="ViewPortfolio">
+      <Drawer.Screen name="ViewPortfolio" component={ViewPortfolio} />
+      <Drawer.Screen name="Summary" component={Summary} />
+      <Drawer.Screen name="DivCalendar" component={DivCalendar} />
+    </Drawer.Navigator>
+  );
+}
 
 function StackNav() {
   return (
-    <Stack.Navigator initialRouteName="ViewPortfolio" headerMode="none">
-      <Stack.Screen name="ViewNotes" component={ViewNotes} />
-      <Stack.Screen name="AddNotes" component={AddNotes} />
-      <Stack.Screen name="EditNotes" component={EditNotes} />
-      <Stack.Screen name="TestAPI" component={TestAPI} />
-      <Stack.Screen name="ViewPortfolio" component={ViewPortfolio} />
-      <Stack.Screen name="AddPortfolio" component={AddPortfolio} />
-      <Stack.Screen name="Summary" component={Summary} />
-      <Stack.Screen name="portfolioSummary" component={portfolioSummary} />
-      <Stack.Screen name="DivCalendar" component={DivCalendar} />
-    </Stack.Navigator>
+    <>
+      <Stack.Navigator initialRouteName="ViewPortfolio" headerMode="none">
+        <Stack.Screen name="ViewNotes" component={ViewNotes} />
+        <Stack.Screen name="AddNotes" component={AddNotes} />
+        <Stack.Screen name="EditNotes" component={EditNotes} />
+        <Stack.Screen name="TestAPI" component={TestAPI} />
+        <Stack.Screen name="ViewPortfolio" component={DrawerControl} />
+        <Stack.Screen name="AddPortfolio" component={AddPortfolio} />
+        <Stack.Screen name="Summary" component={Summary} />
+        <Stack.Screen name="portfolioSummary" component={portfolioSummary} />
+        <Stack.Screen name="DivCalendar" component={DivCalendar} />
+      </Stack.Navigator>
+    </>
   );
 }
 

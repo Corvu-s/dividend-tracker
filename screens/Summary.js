@@ -25,12 +25,14 @@ function Summary({ navigation }) {
                 <List.Item
                   title={item.portfolioName}
                   description={item.portfolioDescription}
-                  onPress={
-                    () =>
-                      navigation.navigate("portfolioSummary", {
-                        data: item.portfolioID,
-                      }) //pass selected port to the
-                  }
+                  onPress={() => {
+                    dispatch({
+                      type: "SET_ACTIVE_SUMMARY",
+                      data: item.portfolioID - 1,
+                    });
+                    navigation.navigate("portfolioSummary");
+                    console.log("DATA" + state.activeSummary);
+                  }}
                 />
               </List.Section>
             )}
@@ -52,7 +54,6 @@ function Summary({ navigation }) {
           </>
         )}
       </View>
-      <NavBar nav={navigation} />
     </>
   );
 }
