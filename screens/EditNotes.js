@@ -34,7 +34,7 @@ function EditNotes({ navigation }) {
       />
 
       <View style={styles.container}>
-        <Text style={styles.titleContainer}>
+        <Text style={styles.edit_titleContainer}>
           Shares Owned:{" "}
           {state.portfolios[state.activePort - 1].stocks[index].shares}
         </Text>
@@ -45,10 +45,10 @@ function EditNotes({ navigation }) {
           mode="outlined"
           keyboardType="default"
           onChangeText={(e) => setShares(parseInt(e))}
-          style={styles.title}
+          style={styles.edit_title}
         />
         <FAB
-          style={styles.fab}
+          style={styles.edit_update_fab}
           small
           icon="check"
           onPress={() => updateNote()}
@@ -60,32 +60,16 @@ function EditNotes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
+  edit_titleContainer: {
     fontSize: 20,
     justifyContent: "center",
   },
-  title: {
+  edit_title: {
     fontSize: 20,
     marginBottom: 20,
   },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  text: {
-    height: 200,
-    fontSize: 16,
-  },
-  fab: {
+
+  edit_update_fab: {
     position: "absolute",
     margin: 20,
     top: 570,

@@ -155,6 +155,46 @@ const styles = StyleSheet.create({
   view_stocks_listSize: {
     height: 90,
   },
+  ////////////////////Portfolio Summary
+  view_portfolio_reload: {
+    position: "absolute",
+    margin: 20,
+    right: 0,
+    bottom: 50,
+  },
+  ///////////////////Summary Screen
+  summary_text: {
+    justifyContent: "center",
+    top: 300,
+    height: 300,
+    fontSize: 16,
+  },
+
+  summary_go_back: {
+    position: "absolute",
+    right: 125,
+    top: 360,
+  },
+  //////////////Edit Stocks Screen
+  edit_titleContainer: {
+    fontSize: 20,
+    justifyContent: "center",
+  },
+  edit_title: {
+    fontSize: 20,
+    marginBottom: 20,
+  },
+
+  edit_update_fab: {
+    position: "absolute",
+    margin: 20,
+    top: 570,
+    right: 0,
+  },
+  /////////////////TestAPI
+  api_listTitle: {
+    fontSize: 20,
+  },
 });
 
 export default styles;

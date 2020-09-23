@@ -25,14 +25,17 @@ function Picker() {
       <Text>Select portfolio color</Text>
 
       <Slider
+        style={styles.slider_style}
         value={red}
         minimumValue={0}
         maximumValue={255}
+        value={125}
         step={1}
         onValueChange={(value) => setRed(value)}
       />
       <Slider
         value={green}
+        value={125}
         minimumValue={0}
         maximumValue={255}
         step={1}
@@ -40,6 +43,7 @@ function Picker() {
       />
       <Slider
         value={blue}
+        value={125}
         minimumValue={0}
         maximumValue={255}
         step={1}
@@ -97,5 +101,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     color: (100, 200, 300),
+  },
+  slider_style: {
+    alignContent: "center",
   },
 });

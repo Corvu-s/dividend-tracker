@@ -6,7 +6,7 @@ import Head from "../components/Head";
 import { Context } from "../navigation/Store";
 import DivCalendar from "../components/DivCalendar";
 import { VictoryPie } from "victory-native";
-
+import styles from "../Styling/styles";
 function portfolioSummary({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const [pie1, setPie1] = useState([]);
@@ -46,7 +46,7 @@ function portfolioSummary({ navigation }) {
 
       <View style={styles.container}>
         <FAB
-          style={styles.fab}
+          style={styles.view_portfolio_reload}
           large
           icon="refresh"
           onPress={() => setReload(!reload)}
@@ -55,45 +55,5 @@ function portfolioSummary({ navigation }) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  text: {
-    top: 100,
-    height: 300,
-    fontSize: 16,
-  },
-  fab: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 50,
-  },
-  listPos: {
-    position: "absolute",
-    bottom: 100,
-  },
-});
 
 export default portfolioSummary;

@@ -1,18 +1,11 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
-import {
-  Text,
-  IconButton,
-  TextInput,
-  List,
-  FAB,
-  Button,
-} from "react-native-paper";
+import { View, FlatList } from "react-native";
+import { Text, IconButton, TextInput, List } from "react-native-paper";
 import Head from "../components/Head";
 import { divide } from "react-native-reanimated";
 import { Context } from "../navigation/Store";
-
+import styles from "../Styling/styles";
 function TestAPI({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const key = "X3NP9R0INXUALP1Z";
@@ -107,7 +100,7 @@ function TestAPI({ navigation }) {
                   key={index}
                   description={list[index]["2. name"]}
                   descriptionNumberOfLines={2}
-                  titleStyle={styles.listTitle}
+                  titleStyle={styles.api_listTitle}
                   onPress={() => {
                     //maybe add the api calls here
                     setClick(!click);
@@ -127,53 +120,4 @@ function TestAPI({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
-  titleContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  listTitle: {
-    fontSize: 20,
-  },
-  iconButton: {
-    backgroundColor: "rgba(46, 113, 102, 0.8)",
-    position: "absolute",
-    right: 0,
-    top: 40,
-    margin: 10,
-  },
-  text: {
-    height: 300,
-    fontSize: 16,
-  },
-  fab: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 0,
-  },
-  test: {
-    position: "absolute",
-    margin: 20,
-    right: 0,
-    bottom: 0,
-  },
-  info: {
-    position: "absolute",
-    margin: 20,
-    right: -20,
-    bottom: 0,
-  },
-});
 export default TestAPI;
