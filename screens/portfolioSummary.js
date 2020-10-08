@@ -12,13 +12,16 @@ import Head from "../components/Head";
 import { Context } from "../navigation/Store";
 import DivCalendar from "../components/DivCalendar";
 import styles from "../Styling/styles";
-import { LineChart, ProgressChart } from "react-native-chart-kit";
+import { LineChart, ProgressChart, PieChart } from "react-native-chart-kit";
 function portfolioSummary({ navigation }) {
   //chart link
   //https://www.npmjs.com/package/react-native-chart-kit
+  // module or hook idea, make a function that returns a specified number of rgb colours that are close to eachother, i
+  //kinda like make me a colour swatch with n shades that are similar
   const [state, dispatch] = useContext(Context); //important for global state
   const [reload, setReload] = useState(false);
-  const [testSet, setTestSet] = useState();
+  const [pieData, setPieData] = useState();
+
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -50,26 +53,22 @@ function portfolioSummary({ navigation }) {
 
     const direct = state.portfolios[state.activeSummary];
     if (direct.stocks.length > 0) {
-      var totalShares = 0;
-      const dat = {
-        lables: [],
-        data: [],
-      };
-      //these calculations can be done in the reducer but why not here eh?
-      direct.stocks.map((item) => {
-        //get total shares in the portfolio
-        totalShares = totalShares + item.shares;
-      });
-      direct.stocks.map((item) => {
-        //lables
-        dat.lables.push(item.ticker);
-      });
-      direct.stocks.map((item) => {
-        dat.data.push((item.shares / totalShares).toFixed(2));
-      });
+      var data = [];
 
-      setTestSet(dat); //just set it to a object, thats what the pie wants
-      console.log(dat);
+      //to make this better, have the multiplier for the rgb be a function of the number of stocks so the colours dont get too fucked up after too many stocks
+      direct.stocks.map((item, index) => {
+        data.push({
+          name: item.ticker,
+          shares: item.shares,
+          color: `rgba(${(1 + index) * 30},${(1 + index) * 40},${
+            (1 + index) * 50
+          })`,
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15,
+        });
+      });
+      setPieData(data); //just set it to a object, thats what the pie wants
+      console.log(data);
     }
   }, [reload]);
   return (
@@ -79,17 +78,18 @@ function portfolioSummary({ navigation }) {
           "Summary of " + state.portfolios[state.activeSummary].portfolioName
         }
       />
-      {testSet == undefined ? (
+      {pieData == undefined ? (
         <Text>Nothing to show</Text>
       ) : (
-        <ProgressChart
-          data={testSet}
+        <PieChart
+          data={pieData}
           width={screenWidth}
-          height={300}
-          strokeWidth={16}
-          radius={32}
+          height={220}
           chartConfig={chartConfig}
-          hideLegend={false}
+          accessor="shares"
+          backgroundColor="transparent"
+          paddingLeft="15"
+          absolute
         />
       )}
       <View style={styles.container}>
