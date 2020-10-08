@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList } from "react-native";
-import NavBar from "../components/NavBar";
 import { FAB, List, Button, IconButton, Caption } from "react-native-paper";
 import Head from "../components/Head";
 import { Context } from "../navigation/Store";
