@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Dimensions } from "react-native";
+import { View, Dimensions,ScrollView } from "react-native";
 import {
   FAB,
   Text,
@@ -97,7 +97,11 @@ function portfolioSummary({ navigation }) {
           "Summary of " + state.portfolios[state.activeSummary].portfolioName
         }
       />
-      {pieData == undefined ? (
+      
+      <View style={styles.container}>
+        <>
+        <ScrollView>
+        {pieData == undefined ? (
         <Text>Nothing to show</Text>
       ) : (
         <>
@@ -125,13 +129,19 @@ function portfolioSummary({ navigation }) {
         </>
 
       )}
-      <View style={styles.container}>
+
+          
+        </ScrollView>
+
+
+
         <FAB
           style={styles.view_portfolio_reload}
           large
           icon="refresh"
           onPress={() => setReload(!reload)}
         ></FAB>
+        </>
       </View>
     </>
   );
