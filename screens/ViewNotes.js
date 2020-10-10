@@ -42,13 +42,13 @@ function ViewNotes({ navigation }) {
             }
           })
           .then((responseJson) => {
-            console.log(responseJson);
+           
             dispatch({
               type: "ADD_PRICE",
               i: index,
               data: responseJson.quote.iexRealtimePrice,
             });
-            console.log(state);
+            
           })
           .catch((error) => {
             console.log(error);
@@ -68,7 +68,7 @@ function ViewNotes({ navigation }) {
               i: index,
               data: responseJson.url,
             });
-            console.log(state);
+            
           })
           .catch((error) => {
             console.log(error);
@@ -79,13 +79,16 @@ function ViewNotes({ navigation }) {
         )
           .then((response) => {
             if (response.ok) {
+           
               return response.json();
             }
           })
           .then((responseJson) => {
             const len = responseJson.length;
             const thing = responseJson[len - 1]; //latest payment date, can update to display
+            console.log("divs")
 
+            console.log(responseJson)
             dispatch({
               type: "ADD_DIV_AMOUNT",
               i: index,
@@ -106,6 +109,7 @@ function ViewNotes({ navigation }) {
               i: index,
               data: responseJson,
             });
+            console.log(item)
           })
           .catch((error) => {
             console.log(error);
@@ -132,7 +136,7 @@ function ViewNotes({ navigation }) {
   function handleIncrease(index, p) {
     console.log("PRICE WHEN INCREASED " + p);
     dispatch({ type: "ADD_SHARE", i: index, val: p });
-    console.log(state);
+   
   }
 
   function handleDecrease(index) {

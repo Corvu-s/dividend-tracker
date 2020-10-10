@@ -12,7 +12,7 @@ import Head from "../components/Head";
 import { Context } from "../navigation/Store";
 import DivCalendar from "../components/DivCalendar";
 import styles from "../Styling/styles";
-import { LineChart, ProgressChart, PieChart } from "react-native-chart-kit";
+import { LineChart, ProgressChart, PieChart,ContributionGraph } from "react-native-chart-kit";
 function portfolioSummary({ navigation }) {
   //chart link
   //https://www.npmjs.com/package/react-native-chart-kit
@@ -21,6 +21,7 @@ function portfolioSummary({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const [reload, setReload] = useState(false);
   const [pieData, setPieData] = useState();
+  const [div,setDiv]=useState();
 
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
@@ -43,10 +44,21 @@ function portfolioSummary({ navigation }) {
   //graphs: pie graphs, line graphs
   //pie graphs: stock breakdown,
   //line graphs: dividend projection
-  const HoldingData = {
-    labels: [],
-    data: [],
-  };
+ 
+
+  const commitsData = [
+    { date: "2017-01-02", count: 1 },
+    { date: "2017-01-03", count: 2 },
+    { date: "2017-01-04", count: 3 },
+    { date: "2017-01-05", count: 4 },
+    { date: "2017-01-06", count: 5 },
+    { date: "2017-01-30", count: 2 },
+    { date: "2017-01-31", count: 3 },
+    { date: "2017-03-01", count: 2 },
+    { date: "2017-04-02", count: 4 },
+    { date: "2017-03-05", count: 2 },
+    { date: "2017-02-30", count: 4 }
+  ];
 
   useEffect(() => {
     //runs every time
@@ -54,6 +66,7 @@ function portfolioSummary({ navigation }) {
     const direct = state.portfolios[state.activeSummary];
     if (direct.stocks.length > 0) {
       var data = [];
+      var divData=[];
 
       //to make this better, have the multiplier for the rgb be a function of the number of stocks so the colours dont get too fucked up after too many stocks
       direct.stocks.map((item, index) => {
@@ -66,9 +79,15 @@ function portfolioSummary({ navigation }) {
           legendFontColor: "#7F7F7F",
           legendFontSize: 15,
         });
+        if(item.yearToDateDivs.length!=0){
+          item.yearToDateDivs.map((mappedDivData)=>{
+            divData.push({date:mappedDivData.date, count:10})
+          })
+        }
       });
+      setDiv(divData);
       setPieData(data); //just set it to a object, thats what the pie wants
-      console.log(data);
+      console.log(div);
     }
   }, [reload]);
   return (
@@ -81,6 +100,7 @@ function portfolioSummary({ navigation }) {
       {pieData == undefined ? (
         <Text>Nothing to show</Text>
       ) : (
+        <>
         <PieChart
           data={pieData}
           width={screenWidth}
@@ -91,6 +111,19 @@ function portfolioSummary({ navigation }) {
           paddingLeft="15"
           absolute
         />
+
+        <ContributionGraph
+        //year-month-day
+  values={commitsData}
+  endDate={new Date("2017-04-01")}
+  numDays={105}
+  width={screenWidth}
+  height={220}
+  chartConfig={chartConfig}
+/>
+
+        </>
+
       )}
       <View style={styles.container}>
         <FAB
