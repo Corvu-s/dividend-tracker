@@ -21,8 +21,10 @@ function portfolioSummary({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const [reload, setReload] = useState(false);
   const [pieData, setPieData] = useState();
-  const [div,setDiv]=useState();
-
+  const [Monthlydiv,setMonthlyDiv]=useState();
+  const [monthlyDivTotal,setMTotal]=useState(0);
+  const [quarterDivTotal,setQTotal]=useState(0);
+  const [QuarterDiv,setQuarterDiv]=useState();
   const screenWidth = Dimensions.get("window").width;
   const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -34,11 +36,9 @@ function portfolioSummary({ navigation }) {
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
   };
+  
 
-  const tempPie = {
-    labels: ["first", "second", "third"],
-    data: [0.75, 0.1, 0.15],
-  };
+ 
   //plan for this screen
   //have a horizontal section with scroling graphs
   //graphs: pie graphs, line graphs
@@ -46,19 +46,7 @@ function portfolioSummary({ navigation }) {
   //line graphs: dividend projection
  
 
-  const commitsData = [
-    { date: "2017-01-02", count: 1 },
-    { date: "2017-01-03", count: 2 },
-    { date: "2017-01-04", count: 3 },
-    { date: "2017-01-05", count: 4 },
-    { date: "2017-01-06", count: 5 },
-    { date: "2017-01-30", count: 2 },
-    { date: "2017-01-31", count: 3 },
-    { date: "2017-03-01", count: 2 },
-    { date: "2017-04-02", count: 4 },
-    { date: "2017-03-05", count: 2 },
-    { date: "2017-02-30", count: 4 }
-  ];
+  
 
   useEffect(() => {
     //runs every time
@@ -66,8 +54,11 @@ function portfolioSummary({ navigation }) {
     const direct = state.portfolios[state.activeSummary];
     if (direct.stocks.length > 0) {
       var data = [];
-      var divData=[];
-
+      var monthlydata=[];
+      var quarterdata=[];
+      
+      var quarterlyTotal=0;
+      var monthlyTotal=0;
       //to make this better, have the multiplier for the rgb be a function of the number of stocks so the colours dont get too fucked up after too many stocks
       direct.stocks.map((item, index) => {
         data.push({
@@ -80,14 +71,21 @@ function portfolioSummary({ navigation }) {
           legendFontSize: 15,
         });
         if(item.yearToDateDivs.length!=0){
-          item.yearToDateDivs.map((mappedDivData)=>{
-            divData.push({date:mappedDivData.date, count:10})
+          item.yearToDateDivs.map((mappedDivData)=>{//only works for div dates that are unique. If two stocks have the same div dat then its not counted. Redo the algorithm so multiple stocks are supported
+            if(mappedDivData.frequency =="Monthly"){
+                setMTotal((monthlyDivTotal+(mappedDivData.amount * item.shares)));
+                monthlydata.push({ticker:mappedDivData.ticker,value:mappedDivData.amount, date:mappedDivData.paymentDate})
+            }else if(mappedDivData.frequency== "quarterly"){
+              setQTotal((quarterDivTotal+(mappedDivData.amount * item.shares)));
+             quarterdata.push({ticker:mappedDivData.ticker,value:mappedDivData.amount, date:mappedDivData.paymentDate})
+            }
           })
         }
       });
-      setDiv(divData);
+      setQuarterDiv(quarterdata)
+      setMonthlyDiv(monthlydata)
       setPieData(data); //just set it to a object, thats what the pie wants
-      console.log(div);
+      console.log(quarterDivTotal);
     }
   }, [reload]);
   return (
@@ -102,9 +100,10 @@ function portfolioSummary({ navigation }) {
         <>
         <ScrollView>
         {pieData == undefined ? (
-        <Text>Nothing to show</Text>
+        <Text>Go add some stocks!</Text>
       ) : (
         <>
+        <Text>Holding breakdown</Text>
         <PieChart
           data={pieData}
           width={screenWidth}
@@ -115,32 +114,18 @@ function portfolioSummary({ navigation }) {
           paddingLeft="15"
           absolute
         />
-
-        <ContributionGraph
-        //year-month-day
-  values={commitsData}
-  endDate={new Date("2017-04-01")}
-  numDays={105}
-  width={screenWidth}
-  height={220}
-  chartConfig={chartConfig}
-/>
-
+        <Text>Dividend Breakdown</Text>
+      <Text>Quarterely Dividends:{quarterDivTotal}</Text>
+      <Text>Monthly Dividends:{ monthlyDivTotal}</Text>
+     
         </>
-
       )}
 
           
         </ScrollView>
 
-
-
-        <FAB
-          style={styles.view_portfolio_reload}
-          large
-          icon="refresh"
-          onPress={() => setReload(!reload)}
-        ></FAB>
+        
+     
         </>
       </View>
     </>
