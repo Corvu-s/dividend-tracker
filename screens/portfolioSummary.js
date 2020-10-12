@@ -13,6 +13,7 @@ import { Context } from "../navigation/Store";
 import DivCalendar from "../components/DivCalendar";
 import styles from "../Styling/styles";
 import { LineChart, ProgressChart, PieChart,ContributionGraph } from "react-native-chart-kit";
+import DRIP from "../components/DRIP"
 function portfolioSummary({ navigation }) {
   //chart link
   //https://www.npmjs.com/package/react-native-chart-kit
@@ -115,12 +116,12 @@ function portfolioSummary({ navigation }) {
           absolute
         />
         <Text>Dividend Breakdown</Text>
-      <Text>Quarterely Dividends:{quarterDivTotal}</Text>
-      <Text>Monthly Dividends:{ monthlyDivTotal}</Text>
+        <Text>Quarterely Dividends:{quarterDivTotal}</Text>
+        <Text>Monthly Dividends:{ monthlyDivTotal}</Text>
      
         </>
       )}
-
+        <DRIP/>
           
         </ScrollView>
 

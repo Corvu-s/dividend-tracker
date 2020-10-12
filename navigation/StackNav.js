@@ -9,6 +9,7 @@ import AddPortfolio from "../screens/AddPortfolio";
 import Summary from "../screens/Summary";
 import portfolioSummary from "../screens/portfolioSummary";
 import DivCalendar from "../components/DivCalendar";
+import DRIP from "../components/DRIP"
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 //import DrawerControl from "../navigation/DrawerControl";
@@ -21,6 +22,8 @@ function DrawerControl() {
       <Drawer.Screen name="ViewPortfolio" component={ViewPortfolio} />
       <Drawer.Screen name="Summary" component={Summary} />
       <Drawer.Screen name="DivCalendar" component={DivCalendar} />
+      <Stack.Screen name="DRIP" component={DRIP} />
+
     </Drawer.Navigator>
   );
 }
@@ -38,6 +41,8 @@ function StackNav() {
         <Stack.Screen name="Summary" component={Summary} />
         <Stack.Screen name="portfolioSummary" component={portfolioSummary} />
         <Stack.Screen name="DivCalendar" component={DivCalendar} />
+        <Stack.Screen name="DRIP" component={DRIP} />
+
       </Stack.Navigator>
     </>
   );

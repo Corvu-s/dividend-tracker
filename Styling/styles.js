@@ -195,6 +195,10 @@ const styles = StyleSheet.create({
   api_listTitle: {
     fontSize: 20,
   },
+  ////////////////DRIP
+  radio_selector:{
+left:100
+  }
 });
 
 export default styles;
