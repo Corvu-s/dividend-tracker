@@ -42,7 +42,6 @@ function ViewNotes({ navigation }) {
             }
           })
           .then((responseJson) => {
-           
             dispatch({
               type: "ADD_PRICE",
               i: index,

@@ -7,6 +7,7 @@ import {
   Button,
   IconButton,
   Caption,
+  Chip
 } from "react-native-paper";
 import Head from "../components/Head";
 import { Context } from "../navigation/Store";
@@ -99,7 +100,7 @@ function portfolioSummary({ navigation }) {
       
       <View style={styles.container}>
         <>
-        <ScrollView>
+        <ScrollView style={{flex:1}}>
         {pieData == undefined ? (
         <Text>Go add some stocks!</Text>
       ) : (
@@ -121,14 +122,14 @@ function portfolioSummary({ navigation }) {
      
         </>
       )}
-        <DRIP/>
+
           
         </ScrollView>
 
-        
      
         </>
       </View>
+
     </>
   );
 }

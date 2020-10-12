@@ -198,7 +198,19 @@ const styles = StyleSheet.create({
   ////////////////DRIP
   radio_selector:{
 left:100
-  }
+  },
+  ////////////////CompanyChips
+ 
+  chipView:{
+    flex:1,
+    
+    
+  },
+  individualChip:{
+   
+    flexWrap:"wrap",
+    margin:5
+  },
 });
 
 export default styles;

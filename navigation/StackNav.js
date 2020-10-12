@@ -11,7 +11,6 @@ import portfolioSummary from "../screens/portfolioSummary";
 import DivCalendar from "../components/DivCalendar";
 import DRIP from "../components/DRIP"
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
 //import DrawerControl from "../navigation/DrawerControl";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -42,7 +41,6 @@ function StackNav() {
         <Stack.Screen name="portfolioSummary" component={portfolioSummary} />
         <Stack.Screen name="DivCalendar" component={DivCalendar} />
         <Stack.Screen name="DRIP" component={DRIP} />
-
       </Stack.Navigator>
     </>
   );
