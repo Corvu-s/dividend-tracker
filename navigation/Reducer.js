@@ -1,5 +1,29 @@
 const Reducer = (state, action) => {
-  switch (action.type) {
+  switch (action.type) { 
+    case "SET_USER_ID":
+      return{
+        ...state,
+        userID:action.data
+      }
+    case "SET_LOGGED_IN":
+      return{
+        ...state,
+        isLoggedIn:false
+      } 
+      case "SET_SIGNED_OUT":
+        return{
+          ...state,
+          isLoggedIn:false
+        }
+    case "LOGIN":
+      return{
+
+      }
+    case "REGISTER":
+      return{
+
+      }
+    /////////////////////database login
     case "SET_ACTIVE_PORT":
       return {
         ...state,

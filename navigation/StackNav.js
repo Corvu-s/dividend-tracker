@@ -14,6 +14,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 //import DrawerControl from "../navigation/DrawerControl";
 
 import Login from '../screens/Login'
+import Register from '../screens/Register'
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +33,9 @@ function DrawerControl() {
 function StackNav() {
   return (
     <>
-      <Stack.Navigator initialRouteName="ViewPortfolio" headerMode="none">
+      <Stack.Navigator initialRouteName="Login" headerMode="none">
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Register" component={Register}/>
         <Stack.Screen name="ViewNotes" component={ViewNotes} />
         <Stack.Screen name="AddNotes" component={AddNotes} />
         <Stack.Screen name="EditNotes" component={EditNotes} />

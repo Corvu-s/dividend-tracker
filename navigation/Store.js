@@ -2,6 +2,8 @@ import React, { createContext, useReducer } from "react";
 import Reducer from "./Reducer";
 
 const initialState = {
+  isLoggedIn:false,
+  userID:"",
   portColour: {},
   portfolios: [],
   error: null,
