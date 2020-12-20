@@ -23,18 +23,30 @@ if(password !== confirm){
 }
 firebase.auth().createUserWithEmailAndPassword(email,password).then((res)=>{
     const uid=res.user.uid
-    const data={
-        id:uid,
-        email,
-        fullName
-    }
+    // const data={
+    //     id:uid,
+    //     email,
+    //     fullName
+    // }
+    const initialState = {//this is the same data structure as the origional app
+        isLoggedIn:false,
+        userID:uid,
+        email:email,
+        fullName:fullName,
+        portColour: {},
+        portfolios: [],
+        error: null,
+        activePort: 0,
+        activeSummary: 0,
+        latestStock: "",
+        currentPrice: 0,
+        num: 0,
+      };
     const usersRef = firebase.firestore().collection('users')
-    usersRef.doc(uid).set(data).then(()=>{
-        dispatch({type:"SET_USER_ID",data:uid})
-        console.log("Current User",data)//test
-        console.log("state",state)//test
-
-        navigation.navigate("ViewPortfolio")
+    usersRef.doc(uid).set(initialState).then(()=>{//need to create a fresh instance of the app data structure in store.js for the database to have
+ 
+    dispatch({type:"SET_LOGGED_IN"})
+    navigation.navigate("ViewPortfolio")
     }).catch((err)=>{
         alert(err)
     })
@@ -52,6 +64,7 @@ return(
         <TextInput label="Confirm Password" value={confirm} onChangeText={text=>setConfirm(text)}/>
 
         <Button onPress={()=>submit()}>Submit</Button>
+        <Button onPress={()=>{navigation.goBack()}}>Go Back</Button>
     </View>
 )
 }

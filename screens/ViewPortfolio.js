@@ -24,11 +24,11 @@ function ViewPortfolio({ navigation }) {
   const handleDelete = (thing) => {
     dispatch({ type: "REMOVE_PORT", index: thing });
   };
-  ///////////////////////////////
+  ///////////////////////////////logout
 
   return (
     <>
-      <Head titleText={"Portfiolio List"} />
+      <Head titleText={"Portfiolio List"} nav={navigation}/>
       <IconButton
         icon="pencil"
         size={25}

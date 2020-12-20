@@ -8,7 +8,7 @@ const Reducer = (state, action) => {
     case "SET_LOGGED_IN":
       return{
         ...state,
-        isLoggedIn:false
+        isLoggedIn:true
       } 
       case "SET_SIGNED_OUT":
         return{
