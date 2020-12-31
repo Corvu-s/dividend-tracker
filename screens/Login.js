@@ -22,7 +22,9 @@ firebase.auth().onAuthStateChanged(user=>{
     if(user){
         userRef.doc(user.uid).get().then((document)=>{
             const userData= document.data()
-            console.log("user logged in",userData)
+            console.log("user logged in")
+            dispatch({type:"LOGIN", data:userData})//sets the data of the app once logged in
+            dispatch({type:"SET_LOGGED_IN"})
             navigation.navigate("ViewPortfolio")
         }).catch(err=>{
             alert(err)
@@ -31,7 +33,7 @@ firebase.auth().onAuthStateChanged(user=>{
 })
 },[])
 
-function register(){
+function Login(){
 firebase.auth().signInWithEmailAndPassword(email,password).then((res)=>{
     const uid=res.user.uid;//gets the actual user id from the authentication response
     const usersRef=firebase.firestore().collection('users')
@@ -42,9 +44,8 @@ firebase.auth().signInWithEmailAndPassword(email,password).then((res)=>{
             alert("this file does not exist!")
             return
         }
-        const user=document.data()//here we get the data of the user thats held in the database.
-        // At this point i need to make an algorithm that updates the local state of the app
-        //perhaps call the reducer to populate the local state
+        const user=document.data()
+        dispatch({type:"LOGIN", data:user})//sets the data of the app once logged in
         dispatch({type:"SET_LOGGED_IN"})
         navigation.navigate("ViewPortfolio")
 
@@ -61,7 +62,7 @@ return(
         <TextInput label="Email" value={email} onChangeText={(text)=>{setEmail(text)}}/>
         <TextInput label="Password" value={password} onChangeText={(text)=>{setPassword(text)}}/>
         <Button onPress={()=>{navigation.navigate("Register")}}>Register</Button>
-        <Button onPress={()=>{register()}}>Login</Button>
+        <Button onPress={()=>{Login()}}>Login</Button>
 
     </View>
 )

@@ -3,6 +3,8 @@ import Reducer from "./Reducer";
 
 const initialState = {
   isLoggedIn:false,
+  email:"",
+  fullName:"",
   userID:"",
   portColour: {},
   portfolios: [],

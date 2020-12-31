@@ -9,15 +9,17 @@ import styles from "../Styling/styles";
 //setup references for dependancy installation for npm and expo!! important for future projects
 //https://heartbeat.fritz.ai/getting-started-with-react-native-and-expo-using-hooks-in-2020-fb466c25b04c
 
-function ViewPortfolio({ navigation }) {
+ function ViewPortfolio({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
   const [toggleEdit, setEdit] = useState(false);
+  //const [portfolioLen,setPortLen]=useState(0)
   ////////////////////////////////////////////////
 
   useEffect(() => {
     //log state to console for testing
     console.log("View Port");
     console.log(state); //test
+    
   }, [state.portfolios]);
 
   ///////////////////////////////Delete Portfolio from list
@@ -25,7 +27,7 @@ function ViewPortfolio({ navigation }) {
     dispatch({ type: "REMOVE_PORT", index: thing });
   };
   ///////////////////////////////logout
-
+ 
   return (
     <>
       <Head titleText={"Portfiolio List"} nav={navigation}/>
@@ -40,7 +42,7 @@ function ViewPortfolio({ navigation }) {
       />
 
       <View style={styles.container}>
-        {state.portfolios.length == 1 ? (
+        { state.portfolios.length == 1 ? (
           <Text>Click the Portfolio to edit or add stocks!</Text>
         ) : (
           <Text>Click the Portfolios to edit or add stocks!</Text>

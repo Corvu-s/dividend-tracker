@@ -6,6 +6,8 @@ import NavBar from "../components/NavBar";
 import { Context } from "../navigation/Store";
 import Picker from "../components/Picker";
 import styles from "../Styling/styles";
+import {firebase} from '../database/config'
+
 function AddPortfolio({ navigation }) {
   const [state, dispatch] = useContext(Context); //important for global state
 
@@ -25,6 +27,23 @@ function AddPortfolio({ navigation }) {
     //   portfolioDescription,
     //   stocks,
     // });
+
+
+///////////////////testing the firestore connections,works!
+     const db=firebase.firestore();
+    const ref=db.collection('users').doc(state.userID)
+    console.log("ref",ref)
+    ref.update({
+      portfolios: firebase.firestore.FieldValue.arrayUnion({
+        portfolioName,
+        portfolioDescription,
+        stocks,
+        portfolioID,
+        portValue,
+        portColour: state.portColour,
+      })
+    });
+    ////////////////////
     dispatch({
       type: "ADD_PORT",
       payload: {

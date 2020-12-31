@@ -29,7 +29,7 @@ firebase.auth().createUserWithEmailAndPassword(email,password).then((res)=>{
     //     fullName
     // }
     const initialState = {//this is the same data structure as the origional app
-        isLoggedIn:false,
+        isLoggedIn:true,
         userID:uid,
         email:email,
         fullName:fullName,

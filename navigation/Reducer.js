@@ -1,5 +1,23 @@
+import {firebase} from '../database/config'
+
+//  function getID(){
+//   const ReducerUserID=firebase.auth().onAuthStateChanged(async function(user) {
+//     if (user) {
+//       // User is signed in.
+//       console.log(user.uid)
+//       return await user.uid
+
+//     } else {
+//       // No user is signed in.
+//     }
+//   });
+//   return ReducerUserID 
+// }
+
 const Reducer = (state, action) => {
+
   switch (action.type) { 
+    ///////////////////login and register
     case "SET_USER_ID":
       return{
         ...state,
@@ -15,15 +33,20 @@ const Reducer = (state, action) => {
           ...state,
           isLoggedIn:false
         }
-    case "LOGIN":
-      return{
-
-      }
+    case "LOGIN"://use this to update the state once logged in. Update the nessesary fields in internal state with the data from the cloud
+     return{
+       ...state,
+      email:action.data.email,
+      fullName:action.data.fullName,
+      userID:action.data.userID,
+      portColour:action.data.portColour,
+      portfolios:action.data.portfolios
+     }
     case "REGISTER":
       return{
 
       }
-    /////////////////////database login
+    /////////////////////
     case "SET_ACTIVE_PORT":
       return {
         ...state,
@@ -35,6 +58,8 @@ const Reducer = (state, action) => {
         activeSummary: action.data,
       };
     case "ADD_PORT": //add an post to the main array
+    //add code to update the cloud here
+   
       return {
         ...state,
         portfolios: state.portfolios.concat(action.payload),
