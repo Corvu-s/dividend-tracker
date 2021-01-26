@@ -57,7 +57,7 @@ firebase.auth().createUserWithEmailAndPassword(email,password).then((res)=>{
 
 return(
     <View style={styles.container}>
-        <Text>Register</Text>
+        <Text style={styles.registerBanner}>Register</Text>
         <TextInput label="Full Name" value={fullName} onChangeText={text=>setFullName(text)}/>
         <TextInput label="email" value={email} onChangeText={text=>setEmail(text)}/>
         <TextInput label="password" value={password} onChangeText={text=>setPassword(text)}/>

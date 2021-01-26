@@ -58,7 +58,7 @@ firebase.auth().signInWithEmailAndPassword(email,password).then((res)=>{
 }
 return(
     <View style={styles.container}>
-        <Text>Login</Text>
+        <Text style={styles.loginBanner}>Login</Text>
         <TextInput label="Email" value={email} onChangeText={(text)=>{setEmail(text)}}/>
         <TextInput label="Password" value={password} onChangeText={(text)=>{setPassword(text)}}/>
         <Button onPress={()=>{navigation.navigate("Register")}}>Register</Button>

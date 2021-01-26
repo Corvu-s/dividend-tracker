@@ -211,6 +211,20 @@ left:100
     flexWrap:"wrap",
     margin:5
   },
+  ////////////////////Login
+  loginBanner:{
+    left:100,
+    padding:20,
+    alignContent:"flex-end",
+    fontSize:50,
+  },
+  /////////////////Register
+  registerBanner:{
+    left:70,
+    padding:20,
+    alignContent:"flex-end",
+    fontSize:50,
+  }
 });
 
 export default styles;

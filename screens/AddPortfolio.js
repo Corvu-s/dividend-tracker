@@ -32,7 +32,7 @@ function AddPortfolio({ navigation }) {
 ///////////////////testing the firestore connections,works!
      const db=firebase.firestore();
     const ref=db.collection('users').doc(state.userID)
-    console.log("ref",ref)
+    //sconsole.log("ref",ref)
     ref.update({
       portfolios: firebase.firestore.FieldValue.arrayUnion({
         portfolioName,

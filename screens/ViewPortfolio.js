@@ -6,25 +6,32 @@ import Head from "../components/Head";
 import NavBar from "../components/NavBar";
 import { Context } from "../navigation/Store";
 import styles from "../Styling/styles";
+import {firebase}from '../database/config'
 //setup references for dependancy installation for npm and expo!! important for future projects
 //https://heartbeat.fritz.ai/getting-started-with-react-native-and-expo-using-hooks-in-2020-fb466c25b04c
 
  function ViewPortfolio({ navigation }) {
+
+
   const [state, dispatch] = useContext(Context); //important for global state
   const [toggleEdit, setEdit] = useState(false);
+  const db=firebase.firestore();
+  const ref=db.collection('users').doc(state.userID)
   //const [portfolioLen,setPortLen]=useState(0)
   ////////////////////////////////////////////////
 
   useEffect(() => {
-    //log state to console for testing
     console.log("View Port");
-    console.log(state); //test
-    
+    console.log(state);  
   }, [state.portfolios]);
 
   ///////////////////////////////Delete Portfolio from list
-  const handleDelete = (thing) => {
-    dispatch({ type: "REMOVE_PORT", index: thing });
+  const handleDelete = (id,name) => {//pass name and id
+    console.log("pName",name)
+    ref.update({
+      portfolios: firebase.firestore.FieldValue.arrayRemove(name)});
+
+    dispatch({ type: "REMOVE_PORT", index: id });
   };
   ///////////////////////////////logout
  
@@ -76,7 +83,7 @@ import styles from "../Styling/styles";
                       compact="true"
                       icon="delete"
                       mode="contained"
-                      onPress={() => handleDelete(item.portfolioID)}
+                      onPress={() => handleDelete(item.portfolioID,item.portfolioName)}
                       style={styles.delete}
                     >
                       Delete{" "}
